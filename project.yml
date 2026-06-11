@@ -1,0 +1,26 @@
+name: CuttingsToGrow
+options:
+  bundleIdPrefix: com.cuttingstogrow
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  CuttingsToGrow:
+    type: application
+    platform: iOS
+    sources:
+      - CuttingsToGrow
+    settings:
+      base:
+        INFOPLIST_KEY_NSCameraUsageDescription: "CuttingsToGrow uses the camera to identify plants and overlay the best cutting points."
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Your location is used to show nearby cutting swaps on the Swap Map."
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Photos are used to track root growth of your cuttings."
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.9"
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0.0
+        PRODUCT_BUNDLE_IDENTIFIER: com.cuttingstogrow.app
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
