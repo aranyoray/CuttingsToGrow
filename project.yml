@@ -3,6 +3,7 @@ options:
   bundleIdPrefix: com.cuttingstogrow
   deploymentTarget:
     iOS: "17.0"
+  createIntermediateGroups: true
 targets:
   CuttingsToGrow:
     type: application
@@ -11,12 +12,16 @@ targets:
       - CuttingsToGrow
     settings:
       base:
-        INFOPLIST_KEY_NSCameraUsageDescription: "CuttingsToGrow uses the camera to identify plants and overlay the best cutting points."
-        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Your location is used to show nearby cutting swaps on the Swap Map."
-        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Photos are used to track root growth of your cuttings."
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        # Info.plist is generated from these keys (modern, no loose Info.plist file).
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "Cuttings Garden"
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        # Usage strings for capabilities used across the phases (camera/photos in
+        # Phases 2–3, location for the Swap Map in Phase 4).
+        INFOPLIST_KEY_NSCameraUsageDescription: "Cuttings Garden uses the camera to photograph a plant so it can identify it and show where to cut."
+        INFOPLIST_KEY_NSPhotoLibraryUsageDescription: "Photos are used to identify plants and to track the root growth of your cuttings."
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "Your location shows nearby cutting swaps on the local Swap Map."
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
         TARGETED_DEVICE_FAMILY: "1"
         SWIFT_VERSION: "5.9"
         CURRENT_PROJECT_VERSION: 1

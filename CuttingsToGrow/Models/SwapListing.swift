@@ -1,52 +1,82 @@
-import Foundation
 import CoreLocation
+import Foundation
+import SwiftData
 
-enum ListingKind: String, Codable, CaseIterable {
-    case freeToGoodHome = "Free to a Good Home"
-    case trade = "Open to Trade"
-}
+/// Whether a listing is a giveaway or a swap.
+enum ListingType: String, Codable, CaseIterable {
+    case gift
+    case trade
 
-enum HandoffMethod: String, Codable, CaseIterable {
-    case dropZone = "Public Drop-off Zone"
-    case mailIn = "Mail-in (sphagnum-packed)"
-    case meetup = "In-person Meetup"
-}
-
-struct SwapListing: Identifiable, Codable, Hashable {
-    let id: UUID
-    var cuttingID: UUID
-    var speciesID: String
-    var title: String
-    var kind: ListingKind
-    var handoff: HandoffMethod
-    var wishlist: String
-    var latitude: Double
-    var longitude: Double
-    var postedDate: Date
-    var ownerName: String
-
-    var coordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    var displayName: String {
+        switch self {
+        case .gift: return "Free to a Good Home"
+        case .trade: return "Open to Trade"
+        }
     }
 
-    var species: PlantSpecies? { PlantDatabase.species(id: speciesID) }
+    var systemImage: String {
+        switch self {
+        case .gift: return "gift.fill"
+        case .trade: return "arrow.triangle.2.circlepath"
+        }
+    }
 }
 
-struct TradeProposal: Identifiable, Codable, Hashable {
-    let id: UUID
-    var listingID: UUID
-    var offeredCuttingID: UUID
-    var message: String
-    var date: Date
-}
-
-/// A partnered safe handoff location (cafe, library, community garden).
-struct DropZone: Identifiable, Codable, Hashable {
-    let id: UUID
-    var name: String
-    var detail: String
+/// A listing on the local Swap Map.
+///
+/// A SwiftData `@Model`, stored locally. Listings come from two sources: the
+/// bundled `seed_listings.json` (seeded once on first launch so the map isn't
+/// empty) and, in Phase 4, the user's own rooted cuttings. There is no server —
+/// this is local-first by design, documented as future work in `LEARN.md`.
+@Model
+final class SwapListing {
+    var id: UUID
+    /// The user's own cutting this listing came from; `nil` for seeded demo data.
+    var cuttingID: UUID?
+    /// Links to `PlantSpecies.id` (scientific name).
+    var speciesID: String
+    var title: String
+    var type: ListingType
+    var wantedInReturn: String
     var latitude: Double
     var longitude: Double
+    var contactHandle: String
+    var isActive: Bool
+    var createdDate: Date
+
+    init(
+        id: UUID = UUID(),
+        cuttingID: UUID? = nil,
+        speciesID: String,
+        title: String,
+        type: ListingType,
+        wantedInReturn: String = "",
+        latitude: Double,
+        longitude: Double,
+        contactHandle: String,
+        isActive: Bool = true,
+        createdDate: Date = .now
+    ) {
+        self.id = id
+        self.cuttingID = cuttingID
+        self.speciesID = speciesID
+        self.title = title
+        self.type = type
+        self.wantedInReturn = wantedInReturn
+        self.latitude = latitude
+        self.longitude = longitude
+        self.contactHandle = contactHandle
+        self.isActive = isActive
+        self.createdDate = createdDate
+    }
+}
+
+// MARK: - Convenience (computed, not persisted)
+
+extension SwapListing {
+    var species: PlantSpecies? {
+        KnowledgeBaseService.shared.species(id: speciesID)
+    }
 
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

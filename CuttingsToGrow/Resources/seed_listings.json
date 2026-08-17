@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "note": "Demo Swap Map listings so the map is populated on first launch. Coordinates cluster around a placeholder neighbourhood (central San Francisco). These are seeded into the local store the first time the app runs; there is no server. speciesID matches a scientificName in the knowledge base.",
+  "listings": [
+    {
+      "speciesID": "Epipremnum aureum",
+      "title": "Rooted Golden Pothos - 3 nodes",
+      "type": "gift",
+      "wantedInReturn": "",
+      "latitude": 37.7775,
+      "longitude": -122.4163,
+      "contactHandle": "@maya_grows",
+      "isActive": true
+    },
+    {
+      "speciesID": "Ocimum basilicum",
+      "title": "Basil cuttings, already rooting",
+      "type": "trade",
+      "wantedInReturn": "Any pet-safe houseplant cutting",
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "contactHandle": "@leaf.and.loam",
+      "isActive": true
+    },
+    {
+      "speciesID": "Chlorophytum comosum",
+      "title": "Spider plant babies (pet-safe!)",
+      "type": "gift",
+      "wantedInReturn": "",
+      "latitude": 37.7808,
+      "longitude": -122.4139,
+      "contactHandle": "@sunnywindowsill",
+      "isActive": true
+    },
+    {
+      "speciesID": "Mentha spicata",
+      "title": "Mint runners, very rooted",
+      "type": "gift",
+      "wantedInReturn": "",
+      "latitude": 37.7724,
+      "longitude": -122.4231,
+      "contactHandle": "@balconybounty",
+      "isActive": true
+    },
+    {
+      "speciesID": "Pilea peperomioides",
+      "title": "Chinese money plant pup",
+      "type": "trade",
+      "wantedInReturn": "Looking for a hoya or peperomia",
+      "latitude": 37.7699,
+      "longitude": -122.4108,
+      "contactHandle": "@devon.plants",
+      "isActive": true
+    },
+    {
+      "speciesID": "Allium fistulosum",
+      "title": "Green onion regrows - starter set",
+      "type": "gift",
+      "wantedInReturn": "",
+      "latitude": 37.7835,
+      "longitude": -122.4225,
+      "contactHandle": "@zerowastekitchen",
+      "isActive": true
+    }
+  ]
+}

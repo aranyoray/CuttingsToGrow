@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "note": "Pet-toxicity is the flagship safety feature of Cuttings Garden and runs fully offline. Facts are our own summaries built from the ASPCA Toxic and Non-Toxic Plants reference (facts are not copyrightable; page text was not copied). toxicToSmallPets covers rabbits/rodents and is null where reliable data was not found. Any entry we could not confirm carries \"verify\": true and should be double-checked before relying on it.",
+  "entries": [
+    {
+      "scientificName": "Epipremnum aureum",
+      "commonName": "Golden Pothos",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Insoluble calcium oxalates cause intense oral burning, drooling, and vomiting if chewed.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Monstera deliciosa",
+      "commonName": "Monstera Deliciosa",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Insoluble calcium oxalates; oral irritation, drooling, and difficulty swallowing.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Philodendron hederaceum",
+      "commonName": "Heartleaf Philodendron",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Insoluble calcium oxalates; oral irritation, drooling, vomiting. Common cause of pet ER visits.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Dracaena trifasciata",
+      "commonName": "Snake Plant",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": null,
+      "severityNote": "Saponins cause nausea, drooling, vomiting, and diarrhea. Small-pet data not confirmed.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": true
+    },
+    {
+      "scientificName": "Chlorophytum comosum",
+      "commonName": "Spider Plant",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic. Cats may still vomit if they eat a large amount of the foliage.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Hedera helix",
+      "commonName": "English Ivy",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Triterpenoid saponins; foliage is more toxic than the berries. Vomiting, diarrhea, drooling.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Pilea peperomioides",
+      "commonName": "Chinese Money Plant",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Widely regarded as non-toxic to cats and dogs, but it is not individually listed by ASPCA.",
+      "source": "General horticulture references (not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Peperomia obtusifolia",
+      "commonName": "Baby Rubber Plant (Peperomia)",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Non-toxic to cats and dogs.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Hoya carnosa",
+      "commonName": "Wax Plant (Hoya)",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Commonly regarded as non-toxic; large amounts may cause mild stomach upset. Not individually confirmed on ASPCA list.",
+      "source": "General horticulture references (not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Ficus elastica",
+      "commonName": "Rubber Plant",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Milky latex sap irritates the mouth and skin and causes vomiting if ingested.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Ficus lyrata",
+      "commonName": "Fiddle Leaf Fig",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Insoluble oxalates and irritant sap; oral irritation, drooling, and vomiting.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Tradescantia zebrina",
+      "commonName": "Wandering Dude",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": null,
+      "severityNote": "Sap causes contact dermatitis (red, itchy skin) and mild stomach upset if eaten.",
+      "source": "ASPCA Toxic and Non-Toxic Plants (listed as Wandering Jew)",
+      "verify": true
+    },
+    {
+      "scientificName": "Zamioculcas zamiifolia",
+      "commonName": "ZZ Plant",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Insoluble calcium oxalates; oral irritation and drooling. Wash hands after handling the sap.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Saintpaulia ionantha",
+      "commonName": "African Violet",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Non-toxic to cats and dogs.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Schlumbergera bridgesii",
+      "commonName": "Christmas Cactus",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Non-toxic. Large amounts of the fibrous stems may cause mild vomiting.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Crassula ovata",
+      "commonName": "Jade Plant",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": null,
+      "severityNote": "Toxic principle is unknown; causes vomiting, lethargy, and incoordination. Small-pet data not confirmed.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": true
+    },
+    {
+      "scientificName": "Echeveria elegans",
+      "commonName": "Echeveria",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Regarded as non-toxic to cats and dogs. Not individually listed by ASPCA.",
+      "source": "General horticulture references (not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Curio rowleyanus",
+      "commonName": "String of Pearls",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Toxic; vomiting, drooling, lethargy, and skin dermatitis on contact.",
+      "source": "ASPCA Toxic and Non-Toxic Plants (String of Pearls, Senecio/Curio rowleyanus)",
+      "verify": false
+    },
+    {
+      "scientificName": "Aloe barbadensis miller",
+      "commonName": "Aloe Vera",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Saponins and anthraquinones; vomiting, lethargy, and diarrhea. The clear inner gel is the least toxic part.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Ocimum basilicum",
+      "commonName": "Basil",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic to cats, dogs, and small pets.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Mentha spicata",
+      "commonName": "Mint",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Culinary spearmint leaves are generally non-toxic, but concentrated mint essential oils and very large amounts can upset a pet's stomach.",
+      "source": "General horticulture references (culinary Mentha not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Salvia rosmarinus",
+      "commonName": "Rosemary",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic to cats and dogs.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Thymus vulgaris",
+      "commonName": "Thyme",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Culinary thyme is generally regarded as non-toxic. Concentrated thyme oil is more potent; verify before relying on this.",
+      "source": "General horticulture references (not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Origanum vulgare",
+      "commonName": "Oregano",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "Large amounts may cause mild vomiting or diarrhea. Reports of oregano's pet toxicity vary; verify before relying on this.",
+      "source": "General horticulture references (not individually confirmed on ASPCA list)",
+      "verify": true
+    },
+    {
+      "scientificName": "Lavandula angustifolia",
+      "commonName": "English Lavender",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": null,
+      "severityNote": "Contains linalool; mild nausea and lethargy, worse with concentrated oils. Small-pet data not confirmed.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": true
+    },
+    {
+      "scientificName": "Allium fistulosum",
+      "commonName": "Green Onion",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "SERIOUS: allium compounds damage red blood cells and can cause anemia. Vomiting, weakness, and dark urine. Cats are especially sensitive. Applies to all onions, garlic, chives, and leeks.",
+      "source": "ASPCA Toxic and Non-Toxic Plants (Allium species)",
+      "verify": false
+    },
+    {
+      "scientificName": "Apium graveolens",
+      "commonName": "Celery",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic to cats and dogs.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Lactuca sativa",
+      "commonName": "Romaine Lettuce",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic to cats, dogs, and small pets.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    },
+    {
+      "scientificName": "Capsicum annuum",
+      "commonName": "Bell Pepper",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": null,
+      "severityNote": "The ripe fruit is safe, but the foliage is a nightshade and is best kept away from pets. Pet-safety of the plant is not firmly established; verify before relying on this.",
+      "source": "General horticulture references (nightshade family; not clearly listed by ASPCA)",
+      "verify": true
+    },
+    {
+      "scientificName": "Solanum lycopersicum",
+      "commonName": "Tomato",
+      "toxicToCats": true,
+      "toxicToDogs": true,
+      "toxicToSmallPets": true,
+      "severityNote": "Green foliage, stems, and unripe fruit contain solanine; GI upset, lethargy, and weakness. The ripe red fruit itself is safe.",
+      "source": "ASPCA Toxic and Non-Toxic Plants (Tomato plant)",
+      "verify": false
+    },
+    {
+      "scientificName": "Zingiber officinale",
+      "commonName": "Ginger",
+      "toxicToCats": false,
+      "toxicToDogs": false,
+      "toxicToSmallPets": false,
+      "severityNote": "Non-toxic to cats and dogs.",
+      "source": "ASPCA Toxic and Non-Toxic Plants",
+      "verify": false
+    }
+  ]
+}

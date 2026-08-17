@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "note": "Maps each bundled sample image to the species it depicts, so the Scan flow and the Mock detectors can run end-to-end in the Simulator without a camera. These four PNGs are procedurally generated PLACEHOLDERS (a stem with nodes and leaves). Replace them with real photos of the actual species before recording the demo video, keeping the same fileName so nothing else has to change.",
+  "images": [
+    { "fileName": "pothos", "speciesID": "Epipremnum aureum", "caption": "Golden pothos vine with visible nodes" },
+    { "fileName": "monstera", "speciesID": "Monstera deliciosa", "caption": "Monstera stem with a node and aerial root" },
+    { "fileName": "philodendron", "speciesID": "Philodendron hederaceum", "caption": "Heartleaf philodendron trailing stem" },
+    { "fileName": "basil", "speciesID": "Ocimum basilicum", "caption": "Basil stem with leaf-pair nodes" }
+  ]
+}

@@ -1,60 +1,94 @@
-# CuttingsToGrow 🌱
+# Cuttings Garden 🌱
 
-An iOS app for propagating plant cuttings and swapping them with neighbors — scan a plant, see exactly where to cut, grow roots in your Digital Nursery, then trade or gift on the local Swap Map.
+A local, waste-reducing, pet-safe plant-and-food sharing app for iOS.
+**Congressional App Challenge 2026.**
 
-## Features
+Photograph a plant → it's identified and flagged for pet toxicity → an on-device
+model marks **where to cut** and **which leaves to trim** directly on your photo →
+track the cutting as it roots in your **Digital Nursery** → once it has roots,
+gift or trade it on the local **Swap Map**.
 
-### 1. AR Node Scanner
-Point the camera at a plant and tap **Scan**:
-- **On-device identification** using Apple's Vision framework (`VNClassifyImageRequest`), whose built-in taxonomy includes plants — no network calls, no model download, runs on the Neural Engine.
-- **Node overlay**: Vision saliency + contour curvature analysis localizes likely stem nodes/branch junctions and renders pulsing "cut here" markers with scissors icons over the live preview.
-- Per-species guidance explains exactly where to make the snip (e.g. "1–2 cm below a node").
+> The app runs on still photos + an on-device Core ML object-detection model —
+> **no AR**. The whole capture → detect → overlay → advise → save flow is
+> demoable in the iOS Simulator on bundled sample photos, because the vision
+> features sit behind protocols with deterministic **Mock** implementations.
 
-### 2. Safety & Viability Filter
-Every scan is instantly triaged:
-- **Difficulty** — Beginner (water glass on a windowsill) / Intermediate / Advanced (rooting hormone + humidity).
-- **Pet toxicity** — flags toxicity to cats, dogs, rabbits, and birds (cockatiels) per ASPCA lists. Toxic species carry a 🐾 warning badge in scan results *and* on every swap listing, so adopters know before bringing a plant home.
-- Water vs. soil rooting-time estimates per species.
+## Why it matters (civic impact)
 
-### 3. Digital Nursery
-- Log a cutting straight from a scan.
-- Local push notifications remind you to **change the water every 3 days** (rot prevention) and to **check for roots** at the species' expected rooting time.
-- Photo-tracked root progress; marking a cutting **rooted unlocks** swap listing.
+- 💸 **Save money & cut food waste** — regrow green onion, celery, lettuce, and
+  herbs from kitchen scraps.
+- 🤝 **Neighbourhood mutual aid** — a local free/trade network for cuttings.
+- ♻️ **Less plant waste** — propagate instead of buy.
+- 🐾 **Pet safety (flagship)** — warn people about toxic plants *before* one
+  reaches a cat, dog, or small pet.
 
-### 4. Balcony Bounty Exchange & Swap Map
-- The species database covers everyday growers too: green onions, bell peppers, tomatoes, basil, mint, rosemary — not just rare tropicals.
-- MapKit Swap Map with filters for **"Free to a Good Home"** vs. **"Open to Trade"**, plus 1-for-1 trade proposals (offer a rooted cutting from your Nursery).
-- **Logistics built in**: partnered public **drop-off zones** (cafés, libraries, community gardens) shown on the map, and **mail-in guidance** (damp sphagnum packing) attached to mail-in listings.
+## Design principle: perception vs. reasoning
+
+The trained model only ever reports **anatomy** — `node`, `aerialRoot`,
+`deadOrYellowingLeaf` — each with a confidence score. All "cut here / trim these"
+**reasoning lives in app code** (`CutAdvisor` + the knowledge base), never in the
+model. This keeps the model small and trainable by one student, and keeps the
+advice explainable. Detector confidence is always shown; the app never implies
+certainty the model doesn't have.
 
 ## Architecture
 
 ```
-CuttingsToGrow/
-├── App.swift                  # App entry + tab navigation
-├── Theme/                     # Design system (botanical palette, pills, cards)
-├── Models/                    # PlantSpecies, Cutting, SwapListing, DropZone
-├── Services/
-│   ├── PlantDatabase.swift            # Curated propagation + toxicity knowledge base
-│   ├── PlantClassifierService.swift   # On-device Vision classification + node detection
-│   ├── CameraService.swift            # AVFoundation live session
-│   ├── NurseryStore.swift             # Local JSON persistence + reminders
-│   ├── NotificationService.swift      # Water-change / root-check notifications
-│   └── ExchangeStore.swift            # Listings, trades, drop zones (local-first)
-└── Views/                     # Scanner, ScanResult, Nursery, SwapMap, Exchange
+CuttingsToGrow/                 (Xcode target)
+  App/            entry point, SwiftData container, root TabView
+  Models/         value types (PlantSpecies, ToxicityInfo, AnatomyDetection,
+                  CutGuidance) + SwiftData @Model (Cutting, RootPhoto, SwapListing)
+  Services/
+    KnowledgeBase/  loads the propagation knowledge base, joins toxicity
+    Toxicity/       loads the flagship pet-toxicity dataset
+    Persistence/    SwiftData container + first-launch seeding
+  Shared/         design system, reusable views, JSON + sample-image loaders
+  Features/       Scan / Nursery / SwapMap screens
+  Resources/      propagation_knowledge_base.json, toxicity.json,
+                  seed_listings.json, SampleImages/
+Docs/             LEARN.md, make_samples.py (MODEL_TRAINING.md & DEMO_SCRIPT.md
+                  land in later phases)
 ```
 
-- **100% on-device ML.** `PlantClassifierService` isolates recognition behind one API, so the built-in Vision classifier can be swapped for a bundled Core ML model (e.g. a PlantNet-300K MobileNetV3 conversion) for finer-grained species coverage without touching view code.
-- **Local-first stores** persist to JSON in Documents; the `ExchangeStore` API is shaped so a real backend can slot in later.
-- SwiftUI throughout, iOS 17+, MapKit for the Swap Map, PhotosUI for root tracking.
+- **Two swappable model seams.** `PlantIdentificationService` and
+  `PlantAnatomyDetector` are protocols with a Mock default and a real
+  implementation that slots in later — dependency inversion, so a demo can never
+  be blocked by an unfinished model.
+- **Local-first, no backend.** Reference data (species, toxicity) ships as JSON;
+  user data (cuttings, photos, listings) uses **SwiftData**. Swap listings are
+  seeded from a bundled dataset. A multi-user backend is explicitly future work.
+- **Honest data.** Facts we couldn't confirm are flagged `"verify": true` in the
+  JSON and shown as an amber "unverified" state, never as "safe."
 
-## Building
+Stack: Swift + SwiftUI (iOS 17+), SwiftData, Core ML + Vision (Phase 3),
+AVFoundation + PhotosUI (Phase 2), MapKit (Phase 4), UserNotifications (Phase 1).
+
+## Build & run
 
 Requires Xcode 15+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen):
 
 ```sh
 brew install xcodegen
+cd CuttingsToGrow            # the repo root (this folder)
 xcodegen generate
 open CuttingsToGrow.xcodeproj
 ```
 
-Run on a physical device for the camera scanner (the simulator has no camera).
+Then pick an iPhone Simulator and run. Phase 0 is fully explorable in the
+Simulator — no device needed. (Live camera capture, added in Phase 2, is the only
+device-only piece.)
+
+## Build status (phased)
+
+The app is built in strict phases; each one compiles, runs, and demos on its own.
+
+- [x] **Phase 0 — Scaffold:** SwiftData container, 3-tab shell, design system,
+      all datasets + sample images loading, seed/preview data, polished empty
+      states.
+- [ ] Phase 1 — Digital Nursery (add/track cuttings, reminders, photo timeline)
+- [ ] Phase 2 — Scan & Learn (species ID + pet-toxicity flags)
+- [ ] Phase 3 — Cut & Trim Guide (on-device anatomy model + overlay)
+- [ ] Phase 4 — Swap Map (MapKit, filters, gift/trade)
+- [ ] Phase 5 — Polish & demo assets
+
+See [`Docs/LEARN.md`](Docs/LEARN.md) for the plain-English architecture write-up.
