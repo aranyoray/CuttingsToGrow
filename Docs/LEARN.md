@@ -4,10 +4,12 @@ This is the running "explain it to a judge" document. It grows one phase at a
 time. If you can explain everything in here in your own words, you can defend the
 whole app — including the machine-learning part.
 
-> **Status: Phase 0 (Scaffold) complete.** The app compiles and runs in the
-> Simulator with three tabs, a full local dataset layer, a design system, and
-> polished empty states. No camera or ML yet — those arrive in later phases,
-> behind interfaces that already shape the code.
+> **Status: Phase 1 (Digital Nursery) complete.** On top of the Phase 0 scaffold,
+> the Nursery tab is now a complete, competition-eligible app on its own: add /
+> edit / delete cuttings, track status and a rooting timeline, get water-change
+> and root-check reminders, and log a photo timeline that marks a cutting rooted.
+> No camera or ML yet — those arrive in later phases, behind interfaces that
+> already shape the code.
 
 ---
 
@@ -143,8 +145,51 @@ CuttingsToGrow/
    of."** Explain JSON-for-reference vs SwiftData-for-user-data, and the
    `verify` honesty flag.
 
+## 8. Phase 1 — the Digital Nursery (fully functional)
+
+This is the first tab that actually *does* something, and it's the app's heart.
+It's built entirely on SwiftData — no ML, no network.
+
+**Create / read / update / delete, the SwiftData way.**
+- **Add** (`AddCuttingView`): pick a species from the searchable, category-grouped
+  `SpeciesPickerView`, name it, choose water/soil, add a note → a `Cutting` is
+  `context.insert`ed.
+- **Read** (`NurseryView`): an `@Query(sort: \Cutting.dateStarted, order: .reverse)`
+  keeps the list live — insert or delete anywhere and the list just updates.
+- **Update** (`EditCuttingView`, `CuttingDetailView`): edits go straight onto the
+  `@Model` object. `EditCuttingView` edits *local copies* and applies them on
+  Save, so Cancel genuinely discards.
+- **Delete**: from a swipe on the list or the detail screen. Detail dismisses
+  first and deletes on the next runloop tick, so the view stops observing the
+  model before it disappears (a real SwiftData gotcha worth knowing).
+
+**The photo timeline (a relationship).** `Cutting` has
+`@Relationship(deleteRule: .cascade) var rootPhotos: [RootPhoto]`. Adding a photo
+via `PhotosPicker` inserts a `RootPhoto`, links it to its cutting, and SwiftData
+maintains the inverse automatically. Delete a cutting and its photos cascade
+away. Photo bytes use `@Attribute(.externalStorage)` so they live as files, not
+database bloat.
+
+**The "rooted unlocks swap" mechanic.** Adding a root photo asks *"does it have
+roots yet?"* Answering yes flips `status` to `rooted`, which is exactly the gate
+the Swap Map (Phase 4) checks (`Cutting.canBeListed`).
+
+**Reminders that respect the model.** `NotificationService` schedules a repeating
+water-change nudge (water cuttings) and a one-time root-check nudge at the
+species' expected rooting time. Everything is keyed to `cutting.id`, so becoming
+rooted or being deleted cancels the right reminders. Permission is requested when
+you add your first cutting — a concrete reason, not a cold prompt. (In DEBUG the
+intervals are compressed to seconds so a reminder can actually fire on camera.)
+
+Three things to be ready to explain here:
+1. **`@Query` is live** — why the list updates itself with no manual refresh.
+2. **The cascade relationship** — one line (`deleteRule: .cascade`) makes photos
+   follow their cutting.
+3. **Reminders keyed to id** — how scheduling and cancelling stay in lockstep
+   with the cutting's status.
+
 ---
 
-*Next: Phase 1 — the Digital Nursery becomes fully functional (add cuttings,
-water-change reminders, root-progress photo timeline). That phase alone is a
-complete, competition-eligible app.*
+*Next: Phase 2 — Scan & Learn. A captured/picked photo runs through
+`PlantIdentificationService` (Mock default) to a species result with the bold
+pet-safety flags, and "Add to Nursery" wires straight into Phase 1.*

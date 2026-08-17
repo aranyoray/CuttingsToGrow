@@ -85,7 +85,9 @@ The app is built in strict phases; each one compiles, runs, and demos on its own
 - [x] **Phase 0 — Scaffold:** SwiftData container, 3-tab shell, design system,
       all datasets + sample images loading, seed/preview data, polished empty
       states.
-- [ ] Phase 1 — Digital Nursery (add/track cuttings, reminders, photo timeline)
+- [x] **Phase 1 — Digital Nursery:** add/edit/delete cuttings, status + rooting
+      timeline, water-change & root-check reminders, and a root-progress photo
+      timeline (the "rooted unlocks swap" mechanic). A complete app on its own.
 - [ ] Phase 2 — Scan & Learn (species ID + pet-toxicity flags)
 - [ ] Phase 3 — Cut & Trim Guide (on-device anatomy model + overlay)
 - [ ] Phase 4 — Swap Map (MapKit, filters, gift/trade)

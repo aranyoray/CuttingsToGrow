@@ -1,14 +1,16 @@
 import SwiftUI
 import SwiftData
 
-/// The Digital Nursery.
+/// The Digital Nursery — the heart of the app.
 ///
-/// Phase 0 wires up the SwiftData `@Query` and a polished empty state. The full
-/// feature — adding cuttings, water-change reminders, and the root-progress photo
-/// timeline — lands in Phase 1, at which point this becomes a complete,
-/// competition-eligible app on its own.
+/// A complete, competition-eligible feature on its own: add cuttings, track each
+/// one's status and rooting timeline, get water-change reminders, and log a
+/// photo timeline of roots forming. Rooted cuttings later unlock the Swap Map.
 struct NurseryView: View {
+    @Environment(\.modelContext) private var context
     @Query(sort: \Cutting.dateStarted, order: .reverse) private var cuttings: [Cutting]
+
+    @State private var showAdd = false
 
     var body: some View {
         NavigationStack {
@@ -18,12 +20,29 @@ struct NurseryView: View {
                 } else {
                     List {
                         ForEach(cuttings) { cutting in
-                            CuttingRow(cutting: cutting)
+                            NavigationLink {
+                                CuttingDetailView(cutting: cutting)
+                            } label: {
+                                CuttingRow(cutting: cutting)
+                            }
                         }
+                        .onDelete(perform: delete)
                     }
                 }
             }
             .navigationTitle("Nursery")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showAdd = true
+                    } label: {
+                        Label("Add cutting", systemImage: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showAdd) {
+                AddCuttingView()
+            }
         }
     }
 
@@ -31,12 +50,28 @@ struct NurseryView: View {
         ContentUnavailableView {
             Label("Your nursery is empty", systemImage: "leaf.circle")
         } description: {
-            Text("Cuttings you take will grow here — with water-change reminders and a photo timeline that tracks roots. Once a cutting has roots, you can gift or trade it on the Swap Map.\n\nAdding cuttings arrives in the next phase.")
+            Text("Take your first cutting to start tracking it — with water-change reminders and a photo timeline that follows the roots. Once a cutting has roots, you can gift or trade it on the Swap Map.")
+        } actions: {
+            Button {
+                showAdd = true
+            } label: {
+                Label("Add a cutting", systemImage: "plus")
+            }
+            .buttonStyle(.borderedProminent)
         }
+    }
+
+    private func delete(at offsets: IndexSet) {
+        for index in offsets {
+            let cutting = cuttings[index]
+            NotificationService.shared.cancelReminders(for: cutting)
+            context.delete(cutting)
+        }
+        try? context.save()
     }
 }
 
-/// A single row in the nursery list. Reused as the nursery fills out in Phase 1.
+/// A single row in the nursery list.
 struct CuttingRow: View {
     let cutting: Cutting
 
